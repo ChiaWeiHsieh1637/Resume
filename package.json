@@ -7,11 +7,11 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "build:css": "npx tailwindcss -i ./src/tailwind.css -o ./src/tailwind.output.css"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@types/styled-components": "^5.1.34",
+    "framer-motion": "^12.10.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.0",

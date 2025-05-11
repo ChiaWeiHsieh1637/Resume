@@ -38,13 +38,13 @@ const Experience: React.FC = () => {
   ];
 
   return (
-    <div id="experience" className="p-6 rounded-lg bg-[#112240]">
+    <div id="experience" className="mb-12">
       <h2 className="text-2xl md:text-3xl font-bold mb-6 text-[#ccd6f6]">工作經歷</h2>
       <div className="space-y-8">
         {experiences.map((exp, index) => (
           <div key={index} className="border-l-2 border-[#64ffda] pl-4 pb-2">
             <div className="text-sm text-[#64ffda] mb-1">{exp.period}</div>
-            <h3 className="text-xl font-medium text-[#e6f1ff]">{exp.position}</h3>
+            <h3 className="text-xl font-medium text-[#ccd6f6]">{exp.position}</h3>
             <div className="text-lg text-[#ccd6f6] mb-2">{exp.company}</div>
             <ul className="space-y-2 text-[#8892b0]">
               {exp.description.map((item, i) => (

@@ -1,31 +1,29 @@
 import { createGlobalStyle } from 'styled-components';
+import { colors, fontFamily } from './theme';
 
 const GlobalStyle = createGlobalStyle`
-  *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
   body {
-    background-color: #0a192f;
-    color: #ccd6f6;
-    font-family: 'Fira Code', monospace;
-    line-height: 1.6;
-  }
-
-  h1, h2, h3 {
-    color: #64ffda;
+    margin: 0;
+    background-color: ${colors.background.primary};
+    color: ${colors.text.primary};
+    font-family: ${fontFamily.primary};
+    transition: all 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   a {
-    color: #64ffda;
+    color: ${colors.accent};
     text-decoration: none;
     transition: 0.3s;
-
     &:hover {
-      opacity: 0.7;
+      opacity: 0.8;
     }
+  }
+
+  ::selection {
+    background-color: ${colors.accent}33;
+    color: ${colors.text.primary};
   }
 `;
 

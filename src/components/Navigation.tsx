@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Navigation: React.FC = () => {
   const navItems = [
@@ -8,23 +9,67 @@ const Navigation: React.FC = () => {
     { id: 'contact', label: '聯絡我' }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: { duration: 0.4 }
+    }
+  };
+
   return (
-    <div className="mb-8 p-6 rounded-lg bg-[#112240]">
-      <nav>
+    <div className="mb-8">
+      <motion.nav
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         <ul className="space-y-3">
-          {navItems.map((item) => (
-            <li key={item.id} className="text-lg">
-              <a 
+          {navItems.map((item, index) => (
+            <motion.li 
+              key={item.id} 
+              className="text-lg"
+              variants={itemVariants}
+              custom={index}
+            >
+              <motion.a 
                 href={`#${item.id}`} 
-                className="flex items-center text-[#ccd6f6] hover:text-[#64ffda] transition-colors"
+                className="flex items-center text-text-primary hover:text-accent transition-colors"
+                whileHover={{ 
+                  x: 5,
+                  transition: { duration: 0.2 }
+                }}
               >
-                <span className="text-[#64ffda] mr-2">▹</span>
-                {item.label}
-              </a>
-            </li>
+                <motion.span 
+                  className="text-accent mr-2"
+                  whileHover={{ rotate: 10 }}
+                >▹</motion.span>
+                <span className="relative overflow-hidden group">
+                  {item.label}
+                  <motion.span 
+                    className="absolute bottom-0 left-0 w-full h-0.5 bg-accent origin-left"
+                    initial={{ scaleX: 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </span>
+              </motion.a>
+            </motion.li>
           ))}
         </ul>
-      </nav>
+      </motion.nav>
     </div>
   );
 };
