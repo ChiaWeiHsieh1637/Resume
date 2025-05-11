@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Experience: React.FC = () => {
   const experiences = [
@@ -37,26 +38,65 @@ const Experience: React.FC = () => {
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.6 }
+    }
+  };
+
   return (
     <div id="experience" className="mb-12">
-      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-[#ccd6f6]">工作經歷</h2>
-      <div className="space-y-8">
+      <motion.h2 
+        className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-text-primary"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
+        工作經歷
+      </motion.h2>
+      <motion.div 
+        className="space-y-6 md:space-y-8"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         {experiences.map((exp, index) => (
-          <div key={index} className="border-l-2 border-[#64ffda] pl-4 pb-2">
-            <div className="text-sm text-[#64ffda] mb-1">{exp.period}</div>
-            <h3 className="text-xl font-medium text-[#ccd6f6]">{exp.position}</h3>
-            <div className="text-lg text-[#ccd6f6] mb-2">{exp.company}</div>
-            <ul className="space-y-2 text-[#8892b0]">
+          <motion.div 
+            key={index} 
+            className="border-l-2 border-accent pl-4 pb-2"
+            variants={itemVariants}
+            whileHover={{ x: 5 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="text-xs sm:text-sm text-accent mb-1">{exp.period}</div>
+            <h3 className="text-lg sm:text-xl font-medium text-text-primary">{exp.position}</h3>
+            <div className="text-base sm:text-lg text-text-primary mb-2">{exp.company}</div>
+            <ul className="space-y-1 sm:space-y-2 text-text-secondary text-sm sm:text-base">
               {exp.description.map((item, i) => (
                 <li key={i} className="flex">
-                  <span className="text-[#64ffda] mr-2">▹</span>
-                  {item}
+                  <span className="text-accent mr-2 flex-shrink-0">▹</span>
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

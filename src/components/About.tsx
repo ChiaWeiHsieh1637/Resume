@@ -38,7 +38,7 @@ const About: React.FC = () => {
   return (
     <div id="about" className="mb-12">
       <motion.h2 
-        className="text-2xl md:text-3xl font-bold mb-6 text-text-primary"
+        className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-text-primary"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -46,7 +46,7 @@ const About: React.FC = () => {
       >
         關於我
       </motion.h2>
-      <div className="text-text-secondary space-y-4">
+      <div className="text-text-secondary space-y-3 md:space-y-4 text-sm sm:text-base md:text-lg">
         <motion.p
           variants={textVariants}
           initial="hidden"
@@ -79,11 +79,12 @@ const About: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
+          className="mt-4 font-medium"
         >
           以下是我熟悉的技術：
         </motion.p>
         <motion.div 
-          className="grid grid-cols-2 gap-2 mt-4"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2 md:mt-4"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

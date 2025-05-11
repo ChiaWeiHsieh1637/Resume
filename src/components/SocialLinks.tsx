@@ -36,7 +36,7 @@ const SocialLinks: React.FC = () => {
   return (
     <div className="mb-8">
       <motion.h3 
-        className="text-xl mb-4 text-text-primary"
+        className="text-xl mb-4 text-text-primary text-center lg:text-left"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -44,7 +44,7 @@ const SocialLinks: React.FC = () => {
         社群連結
       </motion.h3>
       <motion.div 
-        className="flex flex-wrap gap-4"
+        className="flex justify-center lg:justify-start flex-wrap gap-4"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -62,7 +62,7 @@ const SocialLinks: React.FC = () => {
             whileTap={{ scale: 0.95 }}
           >
             <motion.div 
-              className="flex items-center justify-center w-10 h-10 rounded-full border border-accent hover:bg-accent/10"
+              className="flex items-center justify-center w-12 h-12 sm:w-10 sm:h-10 rounded-full border border-accent hover:bg-accent/10"
               whileHover={{ 
                 boxShadow: "0 0 8px rgba(100, 255, 218, 0.5)"
               }}
@@ -76,6 +76,7 @@ const SocialLinks: React.FC = () => {
                 {link.platform.charAt(0)}
               </motion.span>
             </motion.div>
+            <span className="sr-only">{link.platform}</span>
           </motion.a>
         ))}
       </motion.div>
