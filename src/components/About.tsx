@@ -53,7 +53,7 @@ const About: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          您好！我是謝嘉偉，一名充滿熱情的前端工程師，專注於打造美觀且高效能的網頁體驗。
+          我是一位開發者，熱衷於打造無障礙、精準的使用者介面，結合深思熟慮的設計與穩健的工程實作。
         </motion.p>
         <motion.p
           variants={textVariants}
@@ -62,7 +62,7 @@ const About: React.FC = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          我喜歡將設計與技術結合，創造既美觀又實用的數位產品。我擅長使用 React、TypeScript 和現代前端框架開發響應式網站和應用程式。
+          我喜歡將設計與技術結合，創造既美觀又實用的數位產品。我擅長使用 React、TypeScript 和現代前端框架開發響應式網站和應用程式，同時在效能與可用性上都經過精心打造的使用體驗。
         </motion.p>
         <motion.p
           variants={textVariants}

@@ -6,9 +6,7 @@ const MobileNavigation: React.FC = () => {
   
   const navItems = [
     { id: 'about', label: '關於我' },
-    { id: 'experience', label: '工作經歷' },
-    { id: 'projects', label: '專案' },
-    { id: 'contact', label: '聯絡我' }
+    { id: 'experience', label: '工作經歷' }
   ];
 
   const menuVariants = {
@@ -54,6 +52,8 @@ const MobileNavigation: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
       >
         <motion.span
           className="w-6 h-0.5 bg-accent block"
@@ -81,14 +81,14 @@ const MobileNavigation: React.FC = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 bg-background-primary bg-opacity-95 z-40 flex items-center justify-center"
+            className="fixed inset-0 bg-background-primary z-40 flex flex-col items-center justify-center"
             initial="closed"
             animate="open"
             exit="closed"
             variants={menuVariants}
           >
             <motion.nav className="w-full px-10">
-              <ul className="space-y-6 text-center">
+              <ul className="space-y-10 text-center">
                 {navItems.map((item) => (
                   <motion.li 
                     key={item.id}
@@ -96,11 +96,18 @@ const MobileNavigation: React.FC = () => {
                     whileTap={{ scale: 0.95 }}
                   >
                     <motion.button
-                      className="text-2xl text-text-primary hover:text-accent transition-colors"
+                      className="bg-background-primary text-2xl font-medium text-text-primary inline-block"
                       onClick={() => handleNavClick(item.id)}
-                      whileHover={{ scale: 1.05 }}
                     >
-                      {item.label}
+                      <span className="relative inline-block hover:text-accent">
+                        {item.label}
+                        <motion.span 
+                          className="absolute -bottom-2 left-0 w-full h-0.5 "
+                          initial={{ scaleX: 0 }}
+                          whileHover={{ scaleX: 1 }}
+                          transition={{ duration: 0.3 }}
+                        />
+                      </span>
                     </motion.button>
                   </motion.li>
                 ))}

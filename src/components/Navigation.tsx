@@ -4,9 +4,7 @@ import { motion } from 'framer-motion';
 const Navigation: React.FC = () => {
   const navItems = [
     { id: 'about', label: '關於我' },
-    { id: 'experience', label: '工作經歷' },
-    { id: 'projects', label: '專案' },
-    { id: 'contact', label: '聯絡我' }
+    { id: 'experience', label: '工作經歷' }
   ];
 
   const containerVariants = {
