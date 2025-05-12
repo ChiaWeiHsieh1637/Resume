@@ -2,8 +2,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const About: React.FC = () => {
-  const skills = ['JavaScript (ES6+)', 'TypeScript', 'React', 'Vue', 'Next.js', 'HTML & CSS', 'Tailwind CSS', 'Node.js', 'Git', 'Vibe Coding'];
-
+  const skills = ['JavaScript (ES6+)', 'TypeScript', 'React', 'Vue', 'Next.js', 'HTML & CSS', 'Tailwind CSS', 'Sass/SCSS', 'C#', 'Node.js', 'Git', 'RESTful API', 'Vibe Coding'];
+  
+  // 將技能分成兩列
+  const leftColumnSkills = skills.slice(0, Math.ceil(skills.length / 2));
+  const rightColumnSkills = skills.slice(Math.ceil(skills.length / 2));
+  
   // 文本動畫變體
   const textVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -84,28 +88,51 @@ const About: React.FC = () => {
           以下是我熟悉的技術：
         </motion.p>
         <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2 md:mt-4"
+          className="flex gap-4 mt-2 md:mt-3"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {skills.map((skill) => (
-            <motion.div 
-              key={skill} 
-              className="flex items-center"
-              variants={skillVariants}
-              whileHover={{ x: 5 }}
-              transition={{ duration: 0.2 }}
-            >
-              <motion.span 
-                className="text-accent mr-2"
-                animate={{ rotate: [0, 10, 0] }}
-                transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-              >▹</motion.span>
-              {skill}
-            </motion.div>
-          ))}
+          {/* 左列 */}
+          <div className="flex-1 space-y-1">
+            {leftColumnSkills.map((skill) => (
+              <motion.div 
+                key={skill} 
+                className="flex items-center py-0.5"
+                variants={skillVariants}
+                whileHover={{ x: 5 }}
+                transition={{ duration: 0.2 }}
+              >
+                <motion.span 
+                  className="text-accent mr-1.5 flex-shrink-0"
+                  animate={{ rotate: [0, 10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+                >▹</motion.span>
+                <span>{skill}</span>
+              </motion.div>
+            ))}
+          </div>
+          
+          {/* 右列 */}
+          <div className="flex-1 space-y-1">
+            {rightColumnSkills.map((skill) => (
+              <motion.div 
+                key={skill} 
+                className="flex items-center py-0.5"
+                variants={skillVariants}
+                whileHover={{ x: 5 }}
+                transition={{ duration: 0.2 }}
+              >
+                <motion.span 
+                  className="text-accent mr-1.5 flex-shrink-0"
+                  animate={{ rotate: [0, 10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+                >▹</motion.span>
+                <span>{skill}</span>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </div>

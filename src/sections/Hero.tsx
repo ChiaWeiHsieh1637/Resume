@@ -7,6 +7,7 @@ import About from '../components/About';
 import Experience from '../components/Experience';
 import MobileNavigation from '../components/MobileNavigation';
 import ScrollToTop from '../components/ScrollToTop';
+import Projects from '../components/Projects';
 
 // 動畫變體
 const containerVariants = {
@@ -54,7 +55,7 @@ const Hero: React.FC = () => {
     });
 
     return (
-        <>
+        <div className="w-full min-h-screen bg-background-primary overflow-x-hidden">
             {/* 移動端漢堡菜單導航 - 只在小屏幕顯示 */}
             <div className="lg:hidden">
                 <MobileNavigation />
@@ -72,44 +73,43 @@ const Hero: React.FC = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8 }}
             >
-                <div className="max-w-7xl mx-auto">
+                <div className="max-w-7xl mx-auto relative">
+                    {/* 左半部分 - 桌面版顯示為固定側邊欄 */}
                     <motion.div 
-                        className="flex flex-col lg:flex-row gap-8 lg:gap-16"
-                        variants={containerVariants}
+                        className="lg:fixed lg:w-[30%] lg:max-w-xs z-10"
+                        variants={itemVariants}
                         initial="hidden"
                         animate="visible"
                     >
-                        {/* 左半部分 - 桌面版顯示為側邊欄，移動端顯示為頂部區域 */}
-                        <motion.div 
-                            className="lg:w-1/3 lg:sticky lg:top-24 lg:self-start lg:h-screen lg:max-h-[calc(100vh-12rem)]"
-                            variants={itemVariants}
-                        >
-                            <div className="lg:pr-8 space-y-6 lg:space-y-10 mb-12 lg:mb-0">
-                                <motion.div variants={itemVariants}>
-                                    <Name />
+                        <div className="lg:pr-8 space-y-6 lg:space-y-10 mb-12 lg:mb-0">
+                            <motion.div variants={itemVariants}>
+                                <Name />
+                            </motion.div>
+                            {/* 在桌面版顯示導航 */}
+                            <div className="hidden lg:block">
+                                <motion.div 
+                                    variants={itemVariants}
+                                    transition={{ delay: 0.4 }}
+                                >
+                                    <Navigation />
                                 </motion.div>
-                                {/* 在桌面版顯示導航 */}
-                                <div className="hidden lg:block">
-                                    <motion.div 
-                                        variants={itemVariants}
-                                        transition={{ delay: 0.4 }}
-                                    >
-                                        <Navigation />
-                                    </motion.div>
-                                    <motion.div 
-                                        variants={itemVariants}
-                                        transition={{ delay: 0.6 }}
-                                    >
-                                        <SocialLinks />
-                                    </motion.div>
-                                </div>
+                                <motion.div 
+                                    variants={itemVariants}
+                                    transition={{ delay: 0.6 }}
+                                >
+                                    <SocialLinks />
+                                </motion.div>
                             </div>
-                        </motion.div>
+                        </div>
+                    </motion.div>
 
-                        {/* 右半部分 - 主要內容區域 */}
+                    {/* 右半部分 - 主要內容區域 */}
+                    <div className="lg:flex lg:justify-end">
                         <motion.div 
-                            className="lg:w-2/3 space-y-16 md:space-y-24"
+                            className="lg:w-[60%] space-y-16 md:space-y-24"
                             variants={containerVariants}
+                            initial="hidden"
+                            animate="visible"
                         >
                             <motion.div
                                 variants={fadeInUpVariants}
@@ -127,8 +127,16 @@ const Hero: React.FC = () => {
                             >
                                 <Experience />
                             </motion.div>
+                            <motion.div
+                                variants={fadeInUpVariants}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, margin: "-100px" }}
+                            >
+                                <Projects />
+                            </motion.div>
                         </motion.div>
-                    </motion.div>
+                    </div>
 
                     {/* 移動端顯示底部社交鏈接 */}
                     <div className="lg:hidden mt-12 pt-8 border-t border-background-secondary">
@@ -139,7 +147,7 @@ const Hero: React.FC = () => {
 
             {/* 返回頂部按鈕 */}
             <ScrollToTop />
-        </>
+        </div>
     );
 };
 

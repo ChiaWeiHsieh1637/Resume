@@ -1,31 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
-// 打字機效果的Hook
-const useTypewriter = (text: string, speed = 100) => {
-  const [displayText, setDisplayText] = useState('');
-  
-  useEffect(() => {
-    let i = 0;
-    const timer = setInterval(() => {
-      if (i < text.length) {
-        setDisplayText(prev => prev + text.charAt(i));
-        i++;
-      } else {
-        clearInterval(timer);
-      }
-    }, speed);
-    
-    return () => clearInterval(timer);
-  }, [text, speed]);
-  
-  return displayText;
-};
-
 const Name: React.FC = () => {
-  const firstName = useTypewriter('謝嘉瑋', 150);
-  const engName = useTypewriter('Chia-Wei Hsieh', 100);
-  
   return (
     <div className="mb-8 text-center lg:text-left">
       <motion.h1 
@@ -34,8 +10,8 @@ const Name: React.FC = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        {firstName}<br/>
-        {engName}
+        謝嘉瑋<br/>
+        Chia-Wei Hsieh
       </motion.h1>
       <motion.h2 
         className="text-xl sm:text-2xl md:text-3xl mt-2 text-text-secondary"

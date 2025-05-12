@@ -5,14 +5,15 @@ const Experience: React.FC = () => {
   const experiences = [
     {
       company: '天下科技股份有限公司',
-      position: '軟體工程師／資深前端工程師',
+      position: '軟體工程師／前端工程師',
       period: '2019-2020',
       description: [
         '負責公司主要產品的前端開發和維護',
         '參與軟體開發到上線全部過程',
         '使用後端C#，前端Vue.js，API串接...等等全部開發過程',
         '指導新人學習開發'
-      ]
+      ],
+      technologies: ['C#', 'Git', 'HTML', 'Vue.js', 'Sass']
     },
     {
       company: '懋騰股份有限公司',
@@ -23,7 +24,8 @@ const Experience: React.FC = () => {
         '實現RFID的運作',
         '優化前端性能和加載時間',
         '參與產品開發到網頁上架全部過程'
-      ]
+      ],
+      technologies: ['HTML', 'CSS', 'JavaScript', 'jQuery']
     },
   ];
 
@@ -83,6 +85,18 @@ const Experience: React.FC = () => {
                 </li>
               ))}
             </ul>
+            {exp.technologies && (
+              <div className="mt-3 flex flex-wrap gap-2">
+                {exp.technologies.map((tech, i) => (
+                  <span 
+                    key={i} 
+                    className="px-2 py-1 bg-background-secondary text-accent text-xs rounded-md"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            )}
           </motion.div>
         ))}
       </motion.div>
