@@ -1,20 +1,5 @@
-<<<<<<< HEAD
-import { serveDir } from "https://deno.land/std@0.224.0/http/file_server.ts";
-
-const PORT = 8000; // 設定伺服器監聽的埠號
-console.log(`Server is running on http://localhost:${PORT}`);
-
-Deno.serve({ port: PORT }, async (req) => {
-    try {
-        return await serveDir(req, { fsRoot: "./public" });
-    } catch (error) {
-        console.error("Error serving file:", error);
-        return new Response("Internal Server Error", { status: 500 });
-    }
-});
-=======
-import { serve } from "https://deno.land/std@0.204.0/http/server.ts";
-import { join, extname } from "https://deno.land/std@0.204.0/path/mod.ts";
+import { serve } from "std/http/server.ts";
+import { join, extname } from "std/path/mod.ts";
 
 const PORT = 8000;
 const PUBLIC_DIR = './dist'; // 你的 build 資料夾位置
@@ -41,7 +26,7 @@ const MIME_TYPES: Record<string, string> = {
 // 靜態文件處理
 async function handleRequest(req: Request) {
   const url = new URL(req.url);
-  let pathname = url.pathname === "/" ? "/index.html" : url.pathname;
+  const pathname = url.pathname === "/" ? "/index.html" : url.pathname;
   let filePath = join(PUBLIC_DIR, pathname);
 
   try {
@@ -87,4 +72,3 @@ async function handleRequest(req: Request) {
 console.log(`服務器運行於 http://localhost:${PORT}`);
 
 serve(handleRequest, { addr: `:${PORT}` });
->>>>>>> be505b6dff6c011cc6a42fe3fa6f207d33d56c4b
