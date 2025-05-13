@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "compilerOptions": {
         "allowJs": true
     },
@@ -6,3 +7,9 @@
         "std/": "https://deno.land/std@0.224.0/"
     }
 }
+=======
+  "compilerOptions": {
+    "lib": ["deno.ns", "dom", "esnext"]
+  }
+} 
+>>>>>>> be505b6dff6c011cc6a42fe3fa6f207d33d56c4b
