@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* 自定義滾動條樣式 */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(100, 108, 255, 0.4);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 108, 255, 0.6);
+}
+
+/* 文章內容樣式 */
+.article-content {
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.article-content h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  color: #64ffda;
+  text-shadow: 0 0 5px rgba(100, 255, 218, 0.5);
+  letter-spacing: 0.5px;
+  padding-left: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(100, 255, 218, 0.3);
+  position: relative;
+}
+
+.article-content h2:after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(100, 255, 218, 0.8), transparent);
+}
+
+.article-content h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-top: 1.2rem;
+  margin-bottom: 0.8rem;
+  color: #64ffda;
+}
+
+.article-content p {
+  margin-bottom: 1.2rem;
+}
+
+.article-content ul,
+.article-content ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.article-content ul {
+  list-style-type: disc;
+}
+
+.article-content ol {
+  list-style-type: decimal;
+}
+
+.article-content li {
+  margin-bottom: 0.5rem;
+}
+
+.article-content pre {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+}
+
+.article-content code {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+}
+
+.article-content .keyword {
+  color: #ff79c6;
+}
+
+.article-content .function {
+  color: #50fa7b;
+}
+
+.article-content .type {
+  color: #8be9fd;
+}
+
+.article-content .string {
+  color: #f1fa8c;
+}
+
+.article-content .comment {
+  color: #6272a4;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+  
+  .article-content h2 {
+    color: #64ffda;
+    text-shadow: 0 0 5px rgba(100, 255, 218, 0.3);
+    border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+  }
+  
+  .article-content h2:after {
+    background: linear-gradient(90deg, rgba(100, 255, 218, 0.6), transparent);
+  }
+  
+  .article-content h3 {
+    color: #64ffda;
+  }
+  
+  .article-content pre {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
