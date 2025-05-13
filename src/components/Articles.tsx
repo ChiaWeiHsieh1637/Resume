@@ -18,6 +18,218 @@ const Articles: React.FC = () => {
 
   const articles: Article[] = [
     {
+      id: 6,
+      title: 'AI 幫我 debug：從 prompt 到結果，我是怎麼訓練它找到關鍵問題的',
+      description: '分享如何有效使用AI作為debug助手，從提供正確上下文到思維鏈提示法，讓AI成為您的實戰夥伴。',
+      date: '2025-05-10',
+      link: 'https://example.com/article6',
+      tags: ['AI', 'Debug', '開發技巧'],
+      content: `
+        <h2>我們這一代工程師很幸運</h2>
+        <p>Debug 不再是深夜一個人對著 terminal 吶喊的事了。有了 AI 工具後，理論上可以少踩雷、多睡覺——但你真的用得對嗎？</p>
+        
+        <p>我不是說 ChatGPT、DeepSeek、Grok 或其他模型有多神。我是說，我們得學會「怎麼用它們幫你 debug」，才能讓這群語言模型變成你的實戰夥伴，而不是會講幹話的 intern。</p>
+        
+        <p>這篇文章就是要分享，我平常是怎麼把 AI 變成我的 debug 助手的。</p>
+        
+        <h2>一、Debug 用 AI，重點不是問「錯在哪」，而是提供「上下文」</h2>
+        <p>AI debug 的第一步：你不能只貼錯誤訊息，然後問它怎麼解決。</p>
+        
+        <p>這樣只會讓你拿到 Stack Overflow 抄來的標準回答（而且通常沒用）。</p>
+        
+        <p>我會這樣做：</p>
+        
+        <ul>
+          <li>貼錯誤訊息，但只貼最有意義的部分</li>
+          <li>附上錯誤發生的上下文程式碼（最多20行）</li>
+          <li>說明「我目前的預期是什麼，實際發生了什麼」</li>
+        </ul>
+        
+        <p>例如不是說：</p>
+        
+        <pre><code><span class="keyword">SyntaxError</span>: Unexpected token ')'</code></pre>
+        
+        <p>而是說：</p>
+        
+        <pre><code>我正在用一個遞迴函式過濾巢狀物件，但在跑 map 時出現 <span class="keyword">SyntaxError</span>，我懷疑是我在 return 的結構出錯了，以下是該段程式碼：
+...
+</code></pre>
+        
+        <p>你給 AI 的 prompt 有多清楚，它給你的幫助就有多精準。</p>
+        
+        <h2>二、我用「AI 思維鏈提示法」提高命中率</h2>
+        <p>有時候我會遇到比較複雜的邏輯 bug，AI 回答一次根本看不懂，我就會開啟我自創的：</p>
+        
+        <p><span class="keyword">思維鏈提示法</span>（Chain of Thought Prompting for Debug）</p>
+        
+        <p>簡單說，我會逼 AI 用「一步步推理」的方式解釋 bug 發生的邏輯，不要直接給我結論。</p>
+        
+        <p>舉個例子：</p>
+        
+        <pre><code>這段程式碼報錯：xxx。請你不要直接給我答案，而是一步步分析它會依序執行什麼，在哪裡可能出錯。</code></pre>
+        
+        <p>這種方式比單純「幫我找 bug」要有效很多，因為：</p>
+        
+        <ul>
+          <li>它會自我檢查推理流程</li>
+          <li>你可以中途打斷、補充更多資訊</li>
+          <li>很容易看出它是不是搞錯方向</li>
+        </ul>
+        
+        <p>我甚至會把 DeepSeek 或 Gemini 的這種思維鏈，copy 貼給其他模型當參考，這在我之前的另一篇有分享過（可以搞出一種 pseudo-cooperation 模式）。</p>
+        
+        <h2>三、模型選擇策略：誰來 debug，哪個模型最會查邏輯？</h2>
+        <p>每個模型的邏輯推理力不一樣，我自己測下來，debug 時會這樣選：</p>
+        
+        <ul>
+          <li><span class="keyword">DeepSeek V3 R1</span>：最會拆解邏輯和變數追蹤，適合複雜流程的錯誤分析</li>
+          <li><span class="keyword">Claude 3.5</span>：很會抓程式碼風格與設計失誤（尤其錯在架構設計而非語法）</li>
+          <li><span class="keyword">GPT-4 Turbo</span>：萬用型，對 prompt 相當穩定，也能處理偏框架面的問題</li>
+          <li><span class="keyword">Grok</span>：我會讓它試試，但偏向「觀察角度」用途</li>
+        </ul>
+        
+        <p>我常做的事是：「不同模型問一次，看誰講得通」，這其實跟請教不同資深工程師 debug 一樣，角度不同會補彼此盲點。</p>
+        
+        <h3>實例：用 AI 查找一個循環引用錯誤</h3>
+        <pre><code><span class="comment">// 錯誤訊息</span>
+<span class="keyword">ReferenceError</span>: Cannot access 'ProcessManager' before initialization
+
+<span class="comment">// 思維鏈分析示例</span>
+<span class="type">模型</span>: 讓我們一步步追蹤代碼執行流程...
+1. 首先導入依賴
+2. <span class="keyword">FileManager</span> 被引入，但 FileManager.js 內部引用了 ProcessManager
+3. ProcessManager.js 內部又引用了 FileManager
+4. 形成循環引用，導致初始化順序問題
+
+<span class="comment">// 解決方案</span>
+<span class="function">重構代碼</span>，將共享功能抽離到第三個模組，打破循環依賴</code></pre>
+        
+        <h2>四、如果 AI 給錯方向，該怎麼辦？</h2>
+        <p>這邊有個關鍵心法：</p>
+        
+        <p>AI 給錯答案不是浪費時間，而是你 prompt 的回饋機會。</p>
+        
+        <p>我通常不會直接否定，而是用這些句子回饋讓它修正思路：</p>
+        
+        <ul>
+          <li>「你剛剛的推理好像跳過了某段函式，我貼給你看」</li>
+          <li>「你的假設前提是錯的，實際輸入是 xxx」</li>
+          <li>「請再重看這段執行流程，從上往下一步步推理一次」</li>
+        </ul>
+        
+        <p>這些做法其實就像在「引導 junior 工程師想清楚錯在哪」，AI 模型會跟你一起進化 prompt 使用能力。</p>
+        
+        <h2>結語：會 debug 的 AI，本質上是你 prompt 出來的</h2>
+        <p>AI debug 不是魔法，也不是智慧光環，它更像是一面鏡子：你給它的資訊夠清楚、夠條理，它就能幫你還原錯誤背後的邏輯。</p>
+        
+        <p>所以下次你遇到 bug，不妨試著這樣問問你的 AI 夥伴：</p>
+        
+        <ul>
+          <li>說說錯誤的上下文</li>
+          <li>給它一點推理空間</li>
+          <li>多一點反饋，少一點責備</li>
+        </ul>
+        
+        <p>它也許不會馬上修好 bug，但它會讓你變成一個「更會想清楚的工程師」。</p>
+        
+        <p>如果你有自己用 AI debug 的特殊套路，也歡迎留言交流。<br>
+        下一篇我想寫「如何用 AI 加速寫測試」，或者「AI 幫我看 legacy code 的奇技淫巧」，如果你想先看哪一篇，也可以跟我說。</p>
+      `
+    },
+    {
+      id: 5,
+      title: '當 Side Project 不只是玩玩而已：如何把小工具變成能自用、可上線的產品',
+      description: '分享如何將個人開發的小工具轉變為實用的線上產品，並探討從開發到部署的全過程。',
+      date: '2024-05-01',
+      link: 'https://weigo-json-coverter.deno.dev',
+      tags: ['Side Project', '產品開發', '部署'],
+      content: `
+        <h2>初衷只是「寫給自己用」</h2>
+        <p>一開始這個工具只是我在開發 API 或測試資料時常用的格式轉換需求。複製資料後要整理格式、刪掉某些欄位、統一欄位名稱……這些事天天在做，手動做一次就煩一次。</p>
+        
+        <p>我沒想太多，直接用 JavaScript 寫了個頁面搭配 textarea 操作，簡單搞定，完全自用。但某天我突然想到：</p>
+        
+        <p>「其實把它部署上去，也沒多難，乾脆讓未來的自己打開網址就能用了。」</p>
+        
+        <p>這句話開啟了從 side project 到可用產品的轉變過程。</p>
+        
+        <h2>我怎麼把它「產品化」？</h2>
+        
+        <h3>1. 把代碼寫得比「湊合能跑」再乾淨一點</h3>
+        <p>很多 side project 是這樣：「能動就好、console.log 到死」。但如果想要讓它變成「真的能用」，至少要做到幾件事：</p>
+        
+        <ul>
+          <li>把邏輯抽成 functions（未來可測）</li>
+          <li>將資料處理與 UI 分離</li>
+          <li>切乾淨一點的 error handling，讓錯誤不會直接炸出 raw JSON</li>
+        </ul>
+        
+        <p>不是追求完美，而是做到「我願意以它作為作品丟出來」，這是心態上的轉換。</p>
+        
+        <h3>2. 選一個免費又快的部署方式</h3>
+        <p>部署小工具其實有很多方式，我個人推薦 Cloudflare Workers 搭配 Deno Deploy 或 Vercel（取決於你用的技術棧）。我自己是用 Deno Deploy：</p>
+        
+        <ul>
+          <li>部署免伺服器設定</li>
+          <li>支援原生 TypeScript / JS</li>
+          <li>整個專案一個 GitHub repo 搞定，部署只要 push</li>
+        </ul>
+        
+        <p>簡單講：「寫完馬上上」，適合像我這樣只是想讓工具趕快能用的人。</p>
+        
+        <h3>3. 設計要極簡，UI 不要自我感覺良好</h3>
+        <p>這類工具基本上就是一件事：「讓人快速完成任務」。</p>
+        <p>所以我界面幾乎沒有設計，只有輸入框、選項與結果輸出。沒有浮動按鈕、沒有動畫特效，因為重點是 快用完，快關掉。</p>
+        <p>就像 Google 翻譯一樣，開起來就是要「馬上開始做事」。</p>
+        
+        <pre><code><span class="comment">// 極簡UI設計範例</span>
+<span class="keyword">function</span> <span class="function">JsonFormatter</span>() {
+  <span class="keyword">return</span> (
+    <span class="keyword">&lt;div</span> className=<span class="string">"formatter"</span><span class="keyword">&gt;</span>
+      <span class="keyword">&lt;textarea</span>
+        value={input}
+        onChange={handleChange}
+        placeholder=<span class="string">"貼上您的JSON..."</span>
+      <span class="keyword">/&gt;</span>
+      
+      <span class="keyword">&lt;div</span> className=<span class="string">"options"</span><span class="keyword">&gt;</span>
+        <span class="keyword">&lt;button</span> onClick={formatJson}<span class="keyword">&gt;</span>格式化<span class="keyword">&lt;/button&gt;</span>
+        <span class="keyword">&lt;button</span> onClick={minifyJson}<span class="keyword">&gt;</span>最小化<span class="keyword">&lt;/button&gt;</span>
+      <span class="keyword">&lt;/div&gt;</span>
+      
+      <span class="keyword">&lt;textarea</span>
+        value={output}
+        readOnly
+      <span class="keyword">/&gt;</span>
+    <span class="keyword">&lt;/div&gt;</span>
+  );
+}</code></pre>
+        
+        <h3>4. 有機會就放上去，哪怕只有 3 個人用</h3>
+        <p>很多人會想：「這種工具會有人用嗎？」</p>
+        <p>老實說，我也不知道。但如果你連放上去都不做，那永遠不會知道。事實上，我把這個工具放上去後，某天在 log 裡看到來自美國、印度的 IP，瞬間就很爽——</p>
+        
+        <p>「原來世界上真的有人用我寫的東西！」</p>
+        
+        <h2>一點點產品思維的火苗</h2>
+        <p>這次經驗也讓我開始思考另一件事：<br>
+        即使是這麼小的 side project，也可以練習「產品思維」。</p>
+        
+        <ul>
+          <li>怎麼讓使用者第一次就會用？</li>
+          <li>怎樣處理錯誤才不會嚇到人？</li>
+          <li>我要不要收集 email？（我後來還真的加了）</li>
+        </ul>
+        
+        <p>這不只是一個工具，而是一個微型產品的雛形。從技術面出發，慢慢往「使用者體驗」、「需求驗證」去延伸，這其實就是產品開發的縮影。</p>
+        
+        <h2>結語：不是所有 side project 都要變產品，但值得試一次</h2>
+        <p>你不用逼自己每個小工具都要變成 SaaS，但至少試一次，體驗看看「寫給自己用」與「寫給其他人用」之間的差距。</p>
+        <p>有時候那只是多加一個 .deploy.ts 的距離，但你能學到的卻是產品思維、工具整合、使用者觀點，以及——<br>
+        一點點成就感。</p>
+      `
+    },
+    {
       id: 4,
       title: '善用「思維鏈 AI」強化開發流程：一種混合調度的實戰策略',
       description: '探討如何透過混合不同 AI 模型的優勢，打造更高效的開發流程與架構設計。',
