@@ -57,12 +57,6 @@ const ArticleDetail: React.FC<ArticleDetailProps> = ({
           onClick={(e) => e.stopPropagation()} // 阻止事件冒泡，點擊文章內容區域不會關閉
         >
           <div className="flex justify-between items-start mb-6">
-            <button
-              onClick={onClose}
-              className="text-text-tertiary hover:text-accent transition-colors"
-            >
-              ← 返回文章列表
-            </button>
             <span className="text-sm text-text-tertiary">{date}</span>
           </div>
           

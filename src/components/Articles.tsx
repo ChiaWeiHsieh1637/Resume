@@ -475,18 +475,116 @@ describe('Counter Component', () => {
         
         <p>通過這些技術，您可以創建在各種設備上都能完美運行的網站。</p>
       `
+    },
+    {
+      id: 7,
+      title: '從一頁式產品頁測市場：我用 Cloudflare Workers + Next.js 做 MVP 的流程與心得',
+      description: '分享如何用極低成本快速驗證產品方向，從技術選型到實際部署的完整經驗。',
+      date: '2025-05-14',
+      link: 'https://example.com/article7',
+      tags: ['Side Project', 'Next.js', 'Cloudflare', 'MVP'],
+      content: `
+        <h2>過去幾週，我實驗了一個點子</h2>
+        <p>做一個一頁式網站，用來測試某個小眾領域是否有市場需求。這不是單純寫頁面而已，而是想用極低成本，快速驗證產品方向可不可行。</p>
+        
+        <p>最終我選擇了用 Cloudflare Workers 搭配 Next.js 來完成整個 MVP，從開發到上線只花了幾個晚上。這篇文章會分享我整個流程、技術選型思考，以及一些實際碰到的坑與心得。</p>
+        
+        <h2>為什麼用一頁式網站？</h2>
+        <p>有個殘酷的現實是：你做出來的產品，可能根本沒人要用。</p>
+        
+        <p>所以我不是從「做一整套系統」開始，而是選擇這樣的流程：</p>
+        
+        <ul>
+          <li>只開發一個簡單 landing page（介紹、亮點、CTA）</li>
+          <li>聚焦一件事：蒐集 email，看有沒有人願意「感興趣」</li>
+          <li>若有反應，才考慮擴展功能（或直接轉方向）</li>
+        </ul>
+        
+        <p>我把這當作一種「微型試水溫」：像廣撒漁網，不花太多錢、但得到真實市場反應。</p>
+        
+        <h2>技術選型：Cloudflare Workers + Next.js</h2>
+        <p>為什麼選這兩個？</p>
+        
+        <h3>Next.js</h3>
+        <ul>
+          <li>寫慣了 React，Next 就是最快速的選擇</li>
+          <li>靜態頁面與 Server Function 並存，寫起來舒服</li>
+          <li>也支援未來擴充到 SSR、API Routes</li>
+        </ul>
+        
+        <h3>Cloudflare Workers</h3>
+        <ul>
+          <li>幾乎免費，不用自己架伺服器</li>
+          <li>Global edge 佈署，自動 CDN 加速</li>
+          <li>支援 wrangler CLI，一行指令上線</li>
+        </ul>
+        
+        <p>這個組合就是我目前測 MVP 最推的 tech stack：熟悉、快、幾乎零成本。</p>
+        
+        <h2>實作流程概覽</h2>
+        <ol>
+          <li>設計頁面內容（用 Notion 寫草稿）</li>
+          <li>用 Next.js 切版與開發</li>
+          <li>串接表單收集 email（我用簡單的 POST + KV）</li>
+          <li>部署到 Cloudflare Workers</li>
+          <li>用 Google Domains 綁定網域</li>
+          <li>上廣告 or 丟社群，觀察 email 收集狀況</li>
+        </ol>
+        
+        <h2>部署小訣竅</h2>
+        <p>這裡是一些部署時的實用技巧，避免你踩雷：</p>
+        
+        <h3>1. next export 並不適合 Workers</h3>
+        <p>雖然 Next 有 next export 可以產生純靜態頁，但會失去動態 API 的彈性。建議用 @cloudflare/next-on-pages，可以完整部署 Next 專案（支援 App Router）。</p>
+        
+        <h3>2. 使用 KV 儲存 email，不用額外後端</h3>
+        <p>Cloudflare Workers 提供 KV，操作簡單、價格低又免維運。你可以把 email 存成：</p>
+        
+        <pre><code><span class="keyword">await</span> env.EMAILS.put(<span class="string">\`user:\${email}\`</span>, <span class="function">JSON.stringify</span>(meta))</code></pre>
+        
+        <h3>3. HTTPS 與網域很簡單就搞定</h3>
+        <p>Google Domains 綁 Cloudflare DNS 大概 5 分鐘搞定，而且會自動配好 SSL。讓整個專案可以看起來「像樣的產品」。</p>
+        
+        <h2>收穫與反思</h2>
+        <h3>優點：</h3>
+        <ul>
+          <li>全部成本接近 0 元（Cloudflare 免費，Next.js 開源）</li>
+          <li>幾晚就能上線，馬上測市場反應</li>
+          <li>實際蒐集到一些有效 email，證實了這個小主題有需求</li>
+        </ul>
+        
+        <h3>缺點與挑戰：</h3>
+        <ul>
+          <li>Workers 在複雜 routing 或 middleware 上有限制（但對一頁式產品影響不大）</li>
+          <li>若未來擴充登入、資料庫，就要思考更完整的架構（但至少已經獲得初步驗證）</li>
+        </ul>
+        
+        <h2>結語：Side Project 不只是玩玩，而是用來驗證未來</h2>
+        <p>我自己是工程師出身，也做過不少 side project。以前很多專案都卡在「寫爽了就停了」，但這次我試著用商業思維切入，把 side project 當作實驗一個能變現的方向。</p>
+        
+        <p>如果你也有一個產品 idea，與其一直想，不如試著用這樣的方式：</p>
+        
+        <ul>
+          <li>簡單 landing page</li>
+          <li>零成本快速上線</li>
+          <li>用 email 或點擊率測市場反應</li>
+        </ul>
+        
+        <p>搞不好你會發現，這次玩玩的小工具，反而成了下一份工作的切入點，甚至變現的起點。</p>
+      `
     }
   ];
 
   // 獲取所有標籤
   const allTags = Array.from(new Set(articles.flatMap(article => article.tags)));
 
-  // 根據選定的標籤過濾文章
-  const filteredArticles = selectedTag 
+  // 根據選定的標籤過濾文章，並按日期排序
+  const filteredArticles = (selectedTag 
     ? articles.filter(article => article.tags.includes(selectedTag))
-    : articles;
+    : articles
+  ).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-    const handleCloseArticle = () => {
+  const handleCloseArticle = () => {
     setSelectedArticle(null);
     // 恢復頁面滾動
     document.body.style.overflow = 'auto';
