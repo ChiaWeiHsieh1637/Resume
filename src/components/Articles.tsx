@@ -233,7 +233,7 @@ const Articles: React.FC = () => {
       id: 4,
       title: '善用「思維鏈 AI」強化開發流程：一種混合調度的實戰策略',
       description: '探討如何透過混合不同 AI 模型的優勢，打造更高效的開發流程與架構設計。',
-      date: '2024-04-15',
+      date: '2025-04-15',
       link: 'https://example.com/article4',
       tags: ['AI', '開發流程', '系統設計'],
       content: `
