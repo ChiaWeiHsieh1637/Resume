@@ -169,6 +169,22 @@ button:focus-visible {
   color: #6272a4;
 }
 
+.article-content blockquote {
+  border-left: 2px solid rgba(100, 255, 218, 0.3);
+  margin: 1.2rem 0;
+  padding: 0.8rem 1.2rem;
+  background-color: rgba(100, 255, 218, 0.03);
+  border-radius: 0 0.3rem 0.3rem 0;
+  font-style: normal;
+}
+
+.article-content blockquote p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
