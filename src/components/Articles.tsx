@@ -18,6 +18,227 @@ const Articles: React.FC = () => {
 
   const articles: Article[] = [
     {
+      id: 11,
+      title: '從實務角度談 RESTful API 設計：常見錯誤與改進方式',
+      description: '結合實務經驗，整理RESTful API設計中的常見錯誤與具體改進方式，幫助開發者建立更穩定、易維護的系統。',
+      date: '2025-05-18',
+      link: 'https://example.com/article11',
+      tags: ['API設計', '後端開發', 'RESTful', '系統架構'],
+      content: `
+        <h2>在多數 Web 專案中，RESTful API 是前後端溝通的橋梁</h2>
+        <p>但在我過去參與的多個大型專案中，經常遇到設計不良的 API 導致維護困難、開發效率低落，甚至系統無法擴展。本文將結合實務經驗，整理幾個常見錯誤與具體改進方式。</p>
+        
+        <h2>一、錯誤的資源命名方式</h2>
+        
+        <h3>錯誤範例：</h3>
+        
+        <pre><code>POST /createUser  
+GET /getAllUser</code></pre>
+        
+        <p>這種命名把行為寫進了 URL，違反了 REST 的設計精神。</p>
+        
+        <h3>改進方式：</h3>
+        
+        <pre><code>POST /users  
+GET /users</code></pre>
+        
+        <p>REST 是「資源導向」的設計思維，URL 代表資源，動作用 HTTP 方法描述（GET、POST、PUT、DELETE）。</p>
+        
+        <h2>二、混用複數與單數資源</h2>
+        
+        <h3>錯誤範例：</h3>
+        
+        <pre><code>GET /user/123  
+DELETE /users/123</code></pre>
+        
+        <p>在大型團隊中，這種不一致會造成文件混亂，甚至出現錯誤的資料操作。</p>
+        
+        <h3>改進方式：</h3>
+        
+        <p>建議固定使用複數名詞作為資源：</p>
+        
+        <pre><code>GET /users/123  
+DELETE /users/123</code></pre>
+        
+        <h2>三、錯誤的狀態碼使用</h2>
+        
+        <p>有些專案會直接回 <span class="keyword">200 OK</span>，即便操作失敗也不改狀態碼，只透過 JSON 內容說明錯誤，這會讓前端無法正確判斷請求狀態。</p>
+        
+        <h3>改進建議：</h3>
+        
+        <ul>
+          <li><span class="keyword">200 OK</span>：操作成功</li>
+          <li><span class="keyword">201 Created</span>：成功建立資源</li>
+          <li><span class="keyword">400 Bad Request</span>：參數錯誤</li>
+          <li><span class="keyword">401 Unauthorized</span>：未授權</li>
+          <li><span class="keyword">403 Forbidden</span>：已登入但無權限</li>
+          <li><span class="keyword">404 Not Found</span>：資源不存在</li>
+          <li><span class="keyword">500 Internal Server Error</span>：伺服器端錯誤</li>
+        </ul>
+        
+        <h2>四、缺乏一致性的錯誤回應格式</h2>
+        
+        <h3>錯誤範例：</h3>
+        
+        <p>有的 API 回傳 <span class="keyword">error_message</span>，有的則是 <span class="keyword">msg</span>，格式混亂會增加前端處理成本。</p>
+        
+        <h3>建議格式：</h3>
+        
+        <pre><code><span class="keyword">{
+  "error": true,
+  "message": "使用者不存在",
+  "code": "USER_NOT_FOUND"
+}</span></code></pre>
+        
+        <h2>五、缺乏版本控制</h2>
+        
+        <p>沒有版本號的 API 當需求改變時，會讓舊的用戶端出錯，進而影響整體服務穩定性。</p>
+        
+        <h3>建議做法：</h3>
+        
+        <p>在 URL 中加入版本：</p>
+        
+        <pre><code>GET /api/v1/users</code></pre>
+        
+        <p>或使用 header（進階應用）</p>
+        
+        <h2>六、不合理的關聯資料處理方式</h2>
+        
+        <h3>錯誤範例：</h3>
+        
+        <pre><code>GET /users/123/posts/456/comments</code></pre>
+        
+        <p>雖然結構看似完整，但實務中會導致複雜度暴增且難以維護。</p>
+        
+        <h3>改進建議：</h3>
+        
+        <p>保留資料的主從關係，但不過度嵌套，必要時使用查詢參數：</p>
+        
+        <pre><code>GET /comments?post_id=456</code></pre>
+        
+        <h2>七、過度依賴資料庫結構</h2>
+        
+        <p>有些開發者將資料庫欄位直接對應 API 格式，例如資料庫欄位是 <span class="keyword">is_deleted</span>，API 就回傳 <span class="keyword">is_deleted: 0</span>，這讓資料對外表現失去語意清晰性。</p>
+        
+        <h3>建議做法：</h3>
+        
+        <p>適度轉換，增加語意：</p>
+        
+        <pre><code><span class="keyword">{
+  "deleted": false
+}</span></code></pre>
+        
+        <h2>結語：寫給人類看的 API，才是好 API</h2>
+        
+        <p>寫 API，不只是給程式用的，更是給團隊、未來自己維護的。思考 API 的可讀性、語意清晰性、前後一致性，遠比快速開發更重要。這些看似瑣碎的細節，才是讓一個專案走得久、跑得穩的基礎。</p>
+        
+        <p>如果你對 RESTful API 設計或系統規劃有進一步的討論想法，或想與我合作 Side Project、進行後端設計改善，歡迎與我聯絡。</p>
+        <p>完整履歷請見：<a href="https://weigo-resume.deno.dev" class="text-accent hover:underline">https://weigo-resume.deno.dev</a></p>
+      `
+    },
+    {
+      id: 10,
+      title: '用 GPT 幫我寫 API，但我還是要自己查文件？實測 AI 寫後端的極限',
+      description: 'AI 會寫程式這件事已經不是新聞。對於一個習慣開發 Side Project 的工程師來說，寫個 API、串個資料庫、處理使用者登入這類工作，早就可以交給 GPT 幫忙草擬初稿。',
+      date: '2025-05-17',
+      link: 'https://example.com/article10',
+      tags: ['AI', '後端開發', 'API', 'Side Project'],
+      content: `
+        <h2>AI 會寫程式這件事已經不是新聞</h2>
+        <p>對於一個習慣開發 Side Project 的工程師來說，寫個 API、串個資料庫、處理使用者登入這類工作，早就可以交給 GPT 幫忙草擬初稿。</p>
+        
+        <p>但我這次不是單純玩玩而已，而是想實際模擬一個小型產品的後端邏輯，全程用 GPT 搭配 Node.js、Express、MongoDB 來完成，順便檢驗「它到底能幫我做到哪裡？」以及「我還需不需要自己查文件？」</p>
+        
+        <p>答案是：你還是得查。</p>
+        
+        <h2>實測任務：寫一個簡單的 API</h2>
+        <p>我給 GPT 的 prompt 不算太難：</p>
+        
+        <blockquote>
+          <p>建立一個註冊 API，使用 email 和 password。</p>
+          <p>用 bcrypt 加密密碼。</p>
+          <p>寫一個登入 API，使用 JWT。</p>
+          <p>用 MongoDB 存放使用者資料。</p>
+        </blockquote>
+        
+        <p>GPT 幾乎是秒回範本，從 app.js 設定、routes/auth.js 到 models/User.js，整包送上來。</p>
+        
+        <p>老實說，第一眼看到的時候有點感動，連 middleware 和錯誤處理都有示意。但我馬上發現幾個問題：</p>
+        
+        <h3>問題一：JWT 秘鑰根本沒放進 .env</h3>
+        <p>GPT 生成的程式碼寫了 <span class="keyword">jwt.sign(payload, process.env.JWT_SECRET)</span>，但根本沒提到 .env 要怎麼寫、也沒裝 dotenv 套件。</p>
+        
+        <p>這個對老手來說不是什麼大事，但對初學者來說會卡關。</p>
+        
+        <h3>問題二：沒有驗證 email 格式，也沒有防止重複註冊</h3>
+        <p>你以為 GPT 會自己幫你防呆嗎？沒有。email 欄位也沒做唯一索引設定，註冊十次同一個 email 也完全沒事。</p>
+        
+        <h3>問題三：錯誤處理太樂觀</h3>
+        <p>GPT 給的 try-catch 都非常寬鬆，幾乎是「有錯就回 500」，完全沒有細緻處理，例如密碼錯誤、使用者不存在、資料庫連線錯誤等等。</p>
+        
+        <pre><code><span class="comment">// GPT 生成的錯誤處理示例</span>
+<span class="keyword">try</span> {
+  <span class="comment">// 一大堆邏輯</span>
+} <span class="keyword">catch</span> (error) {
+  <span class="function">console</span>.<span class="function">error</span>(error);
+  <span class="keyword">return</span> res.<span class="function">status</span>(500).<span class="function">json</span>({ 
+    message: <span class="string">'Server error'</span> 
+  });
+}</code></pre>
+        
+        <h3>問題四：MongoDB schema 過度簡化</h3>
+        <p>只存 email 和 hashed password，沒加時間戳記、也沒有驗證欄位格式或長度。這雖然不能說錯，但距離 production-ready 的設計還差很遠。</p>
+        
+        <pre><code><span class="comment">// GPT 生成的 User Schema</span>
+<span class="keyword">const</span> userSchema = <span class="keyword">new</span> <span class="function">mongoose.Schema</span>({
+  email: {
+    type: <span class="type">String</span>,
+    required: <span class="keyword">true</span>
+  },
+  password: {
+    type: <span class="type">String</span>,
+    required: <span class="keyword">true</span>
+  }
+});</code></pre>
+        
+        <h3>問題五：你還是得自己查文件</h3>
+        <p>我後來還是打開了 MongoDB 官網、JWT 的官方文件、看了一些 Express middleware 的寫法。因為 GPT 不會幫你思考「這樣設計合不合理」，它只會給你「常見寫法的平均值」。</p>
+        
+        <h2>那 GPT 到底有沒有幫上忙？</h2>
+        <p>有的，它幫我節省了非常多的 boilerplate 時間。尤其在我想要快速建立 API 架構的時候，GPT 可以迅速把結構搭起來。比我自己一行一行慢慢寫快上三倍以上。</p>
+        
+        <p>但最關鍵的「架構設計」、「資料驗證」、「安全性考量」仍然要靠自己。GPT 會寫程式，不代表它會寫「對的程式」。</p>
+        
+        <h2>結論：AI 可以寫程式，但不能取代工程師</h2>
+        <p>我們不是被 GPT 淘汰，而是被不懂得思考又全信 AI 的自己淘汰。</p>
+        
+        <p>你還是需要懂：</p>
+        
+        <ul>
+          <li>怎麼設計資料結構</li>
+          <li>什麼邏輯該寫在哪</li>
+          <li>錯誤該怎麼處理才安全</li>
+          <li>哪些地方會有資安風險</li>
+        </ul>
+        
+        <p>否則你寫出來的 API，看起來可以用，其實全是地雷。</p>
+        
+        <h2>如果你也想讓 AI 寫得更聰明，可以這樣做：</h2>
+        <ul>
+          <li>先自己手動設計邏輯，再丟給 GPT 協助實作。</li>
+          <li>把規範和錯誤處理流程明確寫進 prompt。</li>
+          <li>測試後，把錯誤訊息貼回去請 GPT 幫你修正，但自己也要思考修得對不對。</li>
+          <li>把 prompt 和回答當作「討論」，而不是「命令」。</li>
+        </ul>
+        
+        <p>最後，如果你有 AI 協作開發、Side Project 整合或是考試輔導需求，也歡迎與我聯絡。</p>
+        <p>我習慣把 GPT 當作技術夥伴，用它強化產出速度，但也知道什麼時候要自己出手。</p>
+        
+        <p>完整履歷與作品集請見：<br>
+        <a href="https://weigo-resume.deno.dev/" class="text-accent hover:underline">https://weigo-resume.deno.dev/</a></p>
+      `
+    },
+    {
       id: 6,
       title: 'AI 幫我 debug：從 prompt 到結果，我是怎麼訓練它找到關鍵問題的',
       description: '分享如何有效使用AI作為debug助手，從提供正確上下文到思維鏈提示法，讓AI成為您的實戰夥伴。',
