@@ -15,6 +15,26 @@ interface Project {
 const Projects: React.FC = () => {
   const projects: Project[] = [
     {
+      title: 'CSS Emmet 語法轉換工具箱',
+      description: '開發的網頁工具，幫助開發者快速轉換 CSS 屬性為 Emmet 縮寫語法，提供多欄布局、常用網頁布局範本、響應式設計選項，支援明暗主題切換與多語言功能。',
+      tech: ['HTML5', 'CSS3', 'JavaScript', 'Flexbox/Grid'],
+      links: [
+        { text: '程式碼', url: 'https://github.com/ChiaWeiHsieh1637/css2emmet', icon: 'github' },
+        { text: '線上展示', url: 'https://weigo-css-coverter.deno.dev/', icon: 'external' }
+      ],
+      image: '/css-converter.webp'
+    },
+    {
+      title: 'Vue3 Knob 元件',
+      description: '自行開發的高度可配置Vue3旋鈕元件，不依賴任何外部套件，支援v-model雙向綁定、自訂顏色、尺寸、角度，並具有流暢的拖曳體驗和精確的角度計算。',
+      tech: ['Vue3', 'TypeScript', 'SVG', '元件設計'],
+      links: [
+        { text: '程式碼', url: 'https://github.com/ChiaWeiHsieh1637/bgmotion-test-Knob', icon: 'github' },
+        { text: '線上展示', url: 'https://w-bgmotion-knob.deno.dev/', icon: 'external' }
+      ],
+      image: '/vue-knob.webp'
+    },
+    {
       title: '金儀國際科技股份有限公司官網示範',
       description: '大幅改善讀取時間，大幅優化SEO設置，圖片懶加載優化，響應式設計，圖片壓縮處理',
       tech: ['HTML', 'Javascript', 'CSS'],
