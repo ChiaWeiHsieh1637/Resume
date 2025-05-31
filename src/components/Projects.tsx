@@ -22,7 +22,7 @@ const Projects: React.FC = () => {
         { text: '程式碼', url: 'https://github.com/ChiaWeiHsieh1637/css2emmet', icon: 'github' },
         { text: '線上展示', url: 'https://weigo-css-coverter.deno.dev/', icon: 'external' }
       ],
-      image: '/css-converter.webp'
+      image: '/css-emmet.png'
     },
     {
       title: 'Vue3 Knob 元件',
@@ -32,7 +32,7 @@ const Projects: React.FC = () => {
         { text: '程式碼', url: 'https://github.com/ChiaWeiHsieh1637/bgmotion-test-Knob', icon: 'github' },
         { text: '線上展示', url: 'https://w-bgmotion-knob.deno.dev/', icon: 'external' }
       ],
-      image: '/vue-knob.webp'
+      image: '/v-knob.png'
     },
     {
       title: '金儀國際科技股份有限公司官網示範',
